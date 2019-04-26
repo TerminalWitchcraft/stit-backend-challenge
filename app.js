@@ -1,27 +1,40 @@
-const fs = require("fs");
+const glob = require("glob");
+const winston = require("winston");
+const expressWinston = require("express-winston");
 const express = require("express");
+const body_parser = require("body-parser");
 const cors = require("cors");
-const shortid = require("shortid");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const DB = "./db.json";
-const adaper = new FileSync(DB);
-const db = low(adaper);
-
-// Initialize database, if already exists, load it!
-if (!fs.existsSync(DB)) {
-  db.defaults({ user_login: [], user_data: [] }).write();
-  console.log("Creating new database")
-} else {
-  console.log("Reading from existing database")
-}
 
 const port = 8000;
 const app = express();
 
 app.use(cors());
+app.use(
+  expressWinston.logger({
+    transports: [
+      new winston.transports.Console({
+        json: true,
+        colorize: true
+      })
+    ],
+    meta: true,
+    msg: "{{req.ip}}",
+    requestWhitelist: ["method", "url"],
+    bodyWhitelist: []
+  })
+);
+app.use(body_parser.json());
 
-app.get("/", (req, res) => res.send("Hello World!"));
+const authMiddleWare = require("./middlewares/auth.middleware");
+const openRouter = express.Router();
+const secureRouter = express.Router();
+secureRouter.use(authMiddleWare);
+app.get("/", (req, res) => res.status(200).json({ msg: "Hello World" }));
+glob("./routes/*.route.js", null, (err, files) => {
+  files.map(path => {
+    require(path)(openRouter, secureRouter);
+  });
+});
 
 // Run the server
 app.listen(port, () => {
