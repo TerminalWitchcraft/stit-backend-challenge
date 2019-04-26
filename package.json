@@ -1,0 +1,23 @@
+{
+  "name": "stit-backend-challenge",
+  "version": "1.0.0",
+  "description": "Backend coding challenge",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TerminalWitchcraft/stit-backend-challenge.git"
+  },
+  "author": "Hitesh Paul <git@hiteshpaul.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TerminalWitchcraft/stit-backend-challenge/issues"
+  },
+  "homepage": "https://github.com/TerminalWitchcraft/stit-backend-challenge#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "lowdb": "^1.0.0"
+  }
+}
