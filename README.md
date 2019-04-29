@@ -24,7 +24,7 @@ Body:
 ```
 
 
-$$ Login user with the following POST request:
+## Login user with the following POST request:
 Endpoint: `localhost:8000/login`
 Body: 
 ```json
@@ -44,7 +44,7 @@ If credentials are corrent, you should get a JSON response something similar to 
 This contains token, which will be used in the subsequent secure endpoints with the header `Authorization`. The default expiry for the token is 60 minutes, which can be customized in `user.controller.js`
 
 
-$$ Update user preferences with the following POST request:
+## Update user preferences with the following POST request:
 Endpoint: `localhost:8000/secure/setPreferences`
 Body: 
 ```json
@@ -54,7 +54,7 @@ Body:
 }
 ```
 
-$$ Get events based on user preferences using the following GET request:
+## Get events based on user preferences using the following GET request:
 Endpoint: `localhost:8000/secure/getEvents`
 
 The data is returned in the `data` field of the response object if succesful.
