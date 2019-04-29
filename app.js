@@ -32,9 +32,12 @@ secureRouter.use(authMiddleWare);
 app.get("/", (req, res) => res.status(200).json({ msg: "Hello World" }));
 glob("./routes/*.route.js", null, (err, files) => {
   files.map(path => {
+    console.log(path, "adding")
     require(path)(openRouter, secureRouter);
   });
 });
+app.use(openRouter)
+app.use('/secure', secureRouter)
 
 // Run the server
 app.listen(port, () => {

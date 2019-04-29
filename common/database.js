@@ -8,11 +8,11 @@ var db;
 if (!fs.existsSync(DB)) {
   console.log("Creating new database");
   const adaper = new FileSync(DB);
-  const db = low(adaper)
+  db = low(adaper)
   db.defaults({ user_login: [], user_data: [] }).write();
 } else {
   const adaper = new FileSync(DB);
-  const db = low(adaper);
+  db = low(adaper);
   console.log("Reading from existing database");
 }
 
