@@ -59,5 +59,5 @@ Endpoint: `localhost:8000/secure/getEvents`
 
 The data is returned in the `data` field of the response object if succesful.
 
-$ Notes
+# Notes
 `JWT` is used for token management. MVC pattern is followed, although since the number of endpoints are few, all controllers reside in a single file. Password is hashed and then stored.
